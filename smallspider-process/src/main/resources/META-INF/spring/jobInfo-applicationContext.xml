@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="jobInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.smallspider.mapper.JobInfoMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="jobInfoService" class="com.smallspider.service.JobInfoService">
+        <property name="jobInfoMapper" ref="jobInfoMapper"/>
+    </bean>
+
+    <bean id="jobInfoConnector" class="com.smallspider.communication.JobInfoConnector">
+        <constructor-arg name="host" value="127.0.0.1"/>
+        <constructor-arg name="port" value="61613"/>
+        <property name="jobInfoService" ref="jobInfoService"/>
+    </bean>
+
+    <bean id="stompListener" class="com.smallspider.activemq.StompListener">
+        <constructor-arg name="stompConnector" ref="jobInfoConnector"/>
+    </bean>
+</beans>

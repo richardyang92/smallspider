@@ -16,7 +16,7 @@ class SmallSpider:
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Connection': 'close'
         }
-        request_timeout = 1000
+        request_timeout = 3000
         request = urllib2.Request(url, None, request_header)
         response = urllib2.urlopen(request, None, request_timeout)
 

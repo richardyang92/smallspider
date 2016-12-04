@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smallspider.mapper.JobInfoMapper">
+    <sql id="JobInfo_fields">
+        id,job_name,company_name,company_link,address,payments,publish_time
+    </sql>
+    <resultMap id="JobInfoMap" type="com.smallspider.entity.JobInfo">
+        <id property="id" column="id" />
+        <result property="jobName" column="job_name"/>
+        <result property="companyName" column="company_name"/>
+        <result property="companyLink" column="company_link"/>
+        <result property="address" column="address"/>
+        <result property="payments" column="payments"/>
+        <result property="publishTime" column="publish_time"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.smallspider.entity.JobInfo"  keyProperty="id"
+            useGeneratedKeys="true">
+        INSERT INTO
+        job_info (
+          <include refid="JobInfo_fields"/>
+        )
+        VALUES (#{id}, #{jobName},#{companyName}, #{companyLink}, #{address}, #{payments}, #{publishTime});
+        <selectKey resultType="int" keyProperty="id">
+            select
+            LAST_INSERT_ID() as id
+        </selectKey>
+    </insert>
+</mapper>
