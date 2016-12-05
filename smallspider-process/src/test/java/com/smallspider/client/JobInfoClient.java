@@ -1,7 +1,6 @@
 package com.smallspider.client;
 
 import com.smallspider.activemq.StompListener;
-import com.smallspider.entity.JobInfo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -11,7 +10,7 @@ import java.util.Map;
 /**
  * Created by yangyang on 2016/12/4.
  */
-public class SpringMybatisTest {
+public class JobInfoClient {
     public static void main(String[] args) throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:META-INF/spring/applicationContext.xml");
 /*        JobInfo jobInfo = new JobInfo();
